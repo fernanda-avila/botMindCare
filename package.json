@@ -1,0 +1,25 @@
+{
+  "name": "bestmindcare-bot-electron",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "electron": "electron .",
+    "electron-start": "wait-on http://localhost:3000 && electron .",
+    "dev": "concurrently \"npm start\" \"npm run electron-start\""
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.6.0",
+    "react-scripts": "^5.0.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "electron": "^28.1.0",
+    "wait-on": "^8.0.3"
+  }
+}
