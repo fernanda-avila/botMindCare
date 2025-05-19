@@ -46,21 +46,45 @@ O chatbot segue uma proposta visual suave, amigável e acessível, com foco no c
 
 ## 🔧 Como Rodar
 
+---
+
+### 📄 Configurando Variáveis de Ambiente (`.env.local`)
+
+A aplicação utiliza a **API do Groq** para alimentar o chatbot. Por questões de segurança, as credenciais e endpoints estão no `.env.local`, que fica **na raiz do projeto** e **não está versionado** (está no `.gitignore`).
+
+#### ✅ Passos para configurar:
+
+
+# 1. Clone o repositório
+```bash
+git clone https://github.com/fernanda-avila/botMindCare
+```
+
+2. Crie um arquivo `.env.local` na **raiz do projeto**:
+
+   ```bash
+   touch .env.local
+
+3. Adicione a seguinte variável:
+   ```bash
+   GROQ_API_KEY= sua-chave-groq-aqui
+   ```
+   ✨ Substitua sua-chave-groq-aqui pela sua chave real da API Groq.
+   
+4. Salve o arquivo. Agora você pode rodar o frontend normalmente:
+
 ### Web
 ```bash
-# 1. Clone o repositório
-git clone https://github.com/fernanda-avila/botMindCare
-
-# 2. Acesse a pasta principal
+# 1. Acesse a pasta principal
 cd BestMindcare-Bot-Electron
 
-# 3. Instale todas as dependências
+# 2. Instale todas as dependências
 npm install
 
-# 4. Vá até a pasta onde está a aplicação React (frontend)
+# 3. Vá até a pasta onde está a aplicação React (frontend)
 cd frontend/src/app
 
-# 5. Rode a aplicação web 
+# 4. Rode a aplicação web 
 npm run dev
 ```
 
