@@ -65,7 +65,7 @@ npm run dev
 ```
 
 
-## 🔧 Como Rodar com Electron
+### Desktop
 
 ```bash
 # Volte para a raiz do projeto, se ainda não estiver nela
