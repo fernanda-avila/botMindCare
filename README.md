@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🤖 MindCare Chatbot
 
-## Getting Started
+> Chatbot de saúde mental acessível via navegador ou aplicativo desktop, oferecendo uma experiência acolhedora e responsiva para quem busca apoio emocional.
 
-First, run the development server:
+---
 
+## 🧩 Visão Geral
+
+O **MindCare Chatbot** é um assistente virtual que conversa com o usuário de forma empática e humanizada, com foco em **acolhimento psicológico e informações seguras**. Ele pode ser acessado via:
+
+- 🌐 **Aplicação Web** (NextJS)
+- 🖥️ **Aplicativo Desktop** (Electron)
+
+Essa flexibilidade garante acessibilidade em diferentes dispositivos e contextos.
+
+---
+
+## 🚀 Funcionalidades
+
+- 💬 Conversa contínua com respostas empáticas e não diagnósticas
+- 🧠 Foco em saúde mental, com sugestões de práticas saudáveis
+- 🔌 Rodando com mesma base de código no Web e Electron
+- 🔄 Histórico de conversa (localStorage)
+- 🆘 Resposta automática em caso de gatilhos emocionais
+- 🔐 Funciona sem login – 100% anônimo
+- 🌍 Multi-plataforma (funciona em Windows, Linux e macOS via Electron)
+
+---
+
+## ⚙️ Tecnologias Utilizadas
+
+### Frontend
+- **NextJS** 
+- **CSS Modular**
+- **React Router** (navegação)
+- **Electron** (versão desktop)
+- **wait-on** 
+
+
+---
+
+## 🖼️ Design
+
+O chatbot segue uma proposta visual suave, amigável e acessível, com foco no conforto do usuário.  
+
+
+## 🔧 Como Rodar
+
+### Web
 ```bash
+git clone https://github.com/fernanda-avila/botMindCare
+cd BestMindcare-Bot-Electron
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
