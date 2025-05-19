@@ -76,21 +76,21 @@ git clone https://github.com/fernanda-avila/botMindCare
 
 ### Web
 
-# 1. Acesse a pasta principal
+### 1. Acesse a pasta principal
 ```bash
 cd BestMindcare-Bot-Electron
 ```
 
-# 2. Instale todas as dependências
+### 2. Instale todas as dependências
 ```bash
 npm install
 ```
-# 3. Vá até a pasta onde está a aplicação React (frontend)
+### 3. Vá até a pasta onde está a aplicação React (frontend)
 ```bash
 cd frontend/src/app
 ```
 
-# 4. Rode a aplicação web 
+### 4. Rode a aplicação web 
 ```bash
 npm run dev
 ```
@@ -99,12 +99,12 @@ npm run dev
 ### Desktop
 
 
-# Volte para a raiz do projeto, se ainda não estiver nela
+### Volte para a raiz do projeto, se ainda não estiver nela
 ```bash
 cd ../../..
 ```
 
-# Rode a versão Electron (aguarda o backend com wait-on)
+### Rode a versão Electron (aguarda o backend com wait-on)
 ```bash
 npm run electron
 ```
