@@ -74,7 +74,7 @@ git clone https://github.com/fernanda-avila/botMindCare
    
 ### 4. Salve o arquivo. Agora você pode rodar o frontend normalmente:
 
-### Web
+#### Web
 
 ### 1. Acesse a pasta principal
 ```bash
@@ -96,7 +96,7 @@ npm run dev
 ```
 
 
-### Desktop
+#### Desktop
 
 
 ### Volte para a raiz do projeto, se ainda não estiver nela
