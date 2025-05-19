@@ -48,7 +48,28 @@ O chatbot segue uma proposta visual suave, amigável e acessível, com foco no c
 
 ### Web
 ```bash
+# 1. Clone o repositório
 git clone https://github.com/fernanda-avila/botMindCare
+
+# 2. Acesse a pasta principal
 cd BestMindcare-Bot-Electron
+
+# 3. Instale todas as dependências
 npm install
+
+# 4. Vá até a pasta onde está a aplicação React (frontend)
+cd frontend/src/app
+
+# 5. Rode a aplicação web 
 npm run dev
+```
+
+
+## 🔧 Como Rodar com Electron
+
+```bash
+# Volte para a raiz do projeto, se ainda não estiver nela
+cd ../../..
+
+# Rode a versão Electron (aguarda o backend com wait-on)
+npm run electron
