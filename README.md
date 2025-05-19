@@ -55,45 +55,56 @@ A aplicação utiliza a **API do Groq** para alimentar o chatbot. Por questões 
 #### ✅ Passos para configurar:
 
 
-# 1. Clone o repositório
+### 1. Clone o repositório
 ```bash
 git clone https://github.com/fernanda-avila/botMindCare
 ```
 
-2. Crie um arquivo `.env.local` na **raiz do projeto**:
+### 2. Crie um arquivo `.env.local` na **raiz do projeto**:
 
    ```bash
    touch .env.local
+``` 
 
-3. Adicione a seguinte variável:
+### 3. Adicione a seguinte variável:
    ```bash
    GROQ_API_KEY= sua-chave-groq-aqui
    ```
    ✨ Substitua sua-chave-groq-aqui pela sua chave real da API Groq.
    
-4. Salve o arquivo. Agora você pode rodar o frontend normalmente:
+### 4. Salve o arquivo. Agora você pode rodar o frontend normalmente:
 
 ### Web
-```bash
+
 # 1. Acesse a pasta principal
+```bash
 cd BestMindcare-Bot-Electron
+```
 
 # 2. Instale todas as dependências
+```bash
 npm install
-
+```
 # 3. Vá até a pasta onde está a aplicação React (frontend)
+```bash
 cd frontend/src/app
+```
 
 # 4. Rode a aplicação web 
+```bash
 npm run dev
 ```
 
 
 ### Desktop
 
-```bash
+
 # Volte para a raiz do projeto, se ainda não estiver nela
+```bash
 cd ../../..
+```
 
 # Rode a versão Electron (aguarda o backend com wait-on)
+```bash
 npm run electron
+```
