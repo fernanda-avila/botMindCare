@@ -20,7 +20,7 @@ Essa flexibilidade garante acessibilidade em diferentes dispositivos e contextos
 - 💬 Conversa contínua com respostas empáticas e não diagnósticas
 - 🧠 Foco em saúde mental, com sugestões de práticas saudáveis
 - 🔌 Rodando com mesma base de código no Web e Electron
-- 🔄 Histórico de conversa (localStorage)
+- 🔄 Histórico de conversa 
 - 🆘 Resposta automática em caso de gatilhos emocionais
 - 🔐 Funciona sem login – 100% anônimo
 - 🌍 Multi-plataforma (funciona em Windows, Linux e macOS via Electron)
