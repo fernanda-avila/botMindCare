@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🤖 MindCare Chatbot
 
-## Getting Started
+> Chatbot de saúde mental acessível via navegador ou aplicativo desktop, oferecendo uma experiência acolhedora e responsiva para quem busca apoio emocional.
 
-First, run the development server:
+---
 
+## 🧩 Visão Geral
+
+O **MindCare Chatbot** é um assistente virtual que conversa com o usuário de forma empática e humanizada, com foco em **acolhimento psicológico e informações seguras**. Ele pode ser acessado via:
+
+- 🌐 **Aplicação Web** (NextJS)
+- 🖥️ **Aplicativo Desktop** (Electron)
+
+Essa flexibilidade garante acessibilidade em diferentes dispositivos e contextos.
+
+---
+
+## 🚀 Funcionalidades
+
+- 💬 Conversa contínua com respostas empáticas e não diagnósticas
+- 🧠 Foco em saúde mental, com sugestões de práticas saudáveis
+- 🔌 Rodando com mesma base de código no Web e Electron
+- 🔄 Histórico de conversa (localStorage)
+- 🆘 Resposta automática em caso de gatilhos emocionais
+- 🔐 Funciona sem login – 100% anônimo
+- 🌍 Multi-plataforma (funciona em Windows, Linux e macOS via Electron)
+
+---
+
+## ⚙️ Tecnologias Utilizadas
+
+### Frontend
+- **NextJS** 
+- **CSS Modular**
+- **React Router** (navegação)
+- **Electron** (versão desktop)
+- **wait-on** 
+
+
+---
+
+## 🖼️ Design
+
+O chatbot segue uma proposta visual suave, amigável e acessível, com foco no conforto do usuário.  
+
+
+## 🔧 Como Rodar
+
+---
+
+### 📄 Configurando Variáveis de Ambiente (`.env.local`)
+
+A aplicação utiliza a **API do Groq** para alimentar o chatbot. Por questões de segurança, as credenciais e endpoints estão no `.env.local`, que fica **na raiz do projeto** e **não está versionado** (está no `.gitignore`).
+
+#### ✅ Passos para configurar:
+
+
+### 1. Clone o repositório
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/fernanda-avila/botMindCare
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Crie um arquivo `.env.local` na **raiz do projeto**:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+   ```bash
+   touch .env.local
+``` 
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Adicione a seguinte variável:
+   ```bash
+   GROQ_API_KEY= sua-chave-groq-aqui
+   ```
+   ✨ Substitua sua-chave-groq-aqui pela sua chave real da API Groq.
+   
+### 4. Salve o arquivo. Agora você pode rodar o frontend normalmente:
 
-## Learn More
+#### Web
 
-To learn more about Next.js, take a look at the following resources:
+### 1. Acesse a pasta principal
+```bash
+cd BestMindcare-Bot-Electron
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 2. Instale todas as dependências
+```bash
+npm install
+```
+### 3. Vá até a pasta onde está a aplicação React (frontend)
+```bash
+cd frontend/src/app
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 4. Rode a aplicação web 
+```bash
+npm run dev
+```
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### Desktop
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+### Volte para a raiz do projeto, se ainda não estiver nela
+```bash
+cd ../../..
+```
+
+### Rode a versão Electron (aguarda o backend com wait-on)
+```bash
+npm run electron
+```
