@@ -108,3 +108,10 @@ cd ../../..
 ```bash
 npm run electron
 ```
+
+## Converse com o Best!
+Abra esse link no navegador: https://bot-mind-care.vercel.app/
+ou
+Leia o QRCode abaixo:
+
+![qrcode_bot-mind-care vercel app](https://github.com/user-attachments/assets/ae538173-39f2-4930-9a55-12f9dde08ad6)
