@@ -109,9 +109,25 @@ cd ../../..
 npm run electron
 ```
 
-## Converse com o Best!
-Abra esse link no navegador: https://bot-mind-care.vercel.app/
-ou
-Leia o QRCode abaixo:
+## 🤖 Converse com o BestMindCare Bot
 
-![qrcode_bot-mind-care vercel app](https://github.com/user-attachments/assets/ae538173-39f2-4930-9a55-12f9dde08ad6)
+<div align="center" style="margin: 20px 0;">
+  <img 
+    src="https://github.com/user-attachments/assets/ae538173-39f2-4930-9a55-12f9dde08ad6" 
+    alt="QR Code do BestMindCare Bot" 
+    width="150"
+    style="display: block; margin: 0 auto; border: 1px solid #e1e4e8; border-radius: 8px; padding: 5px; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1);"
+  />
+</div>
+
+## 🔗 Link Direto
+[https://bot-mind-care.vercel.app/](https://bot-mind-care.vercel.app/)
+
+
+## 📌 Como usar
+1. Acesse o link acima ou
+2. Escaneie o QR Code com seu celular
+
+<div align="center" style="margin-top: 20px;">
+<small>Desenvolvido com ❤️ para seu bem-estar</small>
+</div>
