@@ -128,6 +128,7 @@ npm run electron
 1. Acesse o link acima ou
 2. Escaneie o QR Code com seu celular
 
+## ℹ️ Sobre
 <div align="center" style="margin-top: 20px;">
-<small>Desenvolvido com ❤️ para seu bem-estar</small>
+O BestMindCare Bot foi desenvolvido para oferecer suporte emocional e informações úteis de forma rápida e acessível.
 </div>
