@@ -27,7 +27,7 @@ export default function ChatPage() {
     const user = localStorage.getItem('usuarioAtual');
     setCurrentUser(user);
     
-    // Mensagem inicial
+  
     setMessages([{
       id: '1',
       text: user 

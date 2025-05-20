@@ -42,7 +42,7 @@ export default function CadastroPage() {
             localStorage.setItem('usuarioAtual', username);
 
             setSuccess('Cadastro realizado com sucesso!');
-            setTimeout(() => router.push('/preferencias'), 2000);
+            setTimeout(() => router.push('/Chat'), 2000);
         }
     } catch (err) {
         setError('Erro ao salvar usuário');
