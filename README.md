@@ -109,7 +109,7 @@ cd ../../..
 npm run electron
 ```
 
-## 🤖 Converse com o BestMindCare Bot
+## 🤖 Converse com o Best!
 
 <div align="center" style="margin: 20px 0;">
   <img 
