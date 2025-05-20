@@ -65,7 +65,7 @@ export default function ChatPage() {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer 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'
+          'Authorization': `Bearer ${process.env.GROQ_API_KEY}`
         },
         body: JSON.stringify({
           model: "llama3-70b-8192",
