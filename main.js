@@ -1,41 +1,37 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
-
 let mainWindow;
 
 function createWindow() {
-
-  const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+  mainWindow = new BrowserWindow({
+    width: 1024,
+    height: 768,
     webPreferences: {
-      contextIsolation: true, 
-      enableRemoteModule: false, 
-      nodeIntegration: false, 
+ 
+      contextIsolation: true,
+      nodeIntegration: false,
+      enableRemoteModule: false,
     },
   });
 
- 
-  win.loadURL('http://localhost:3000');
+
+  mainWindow.loadURL('http://localhost:3000');
 
 
   if (process.env.NODE_ENV === 'development') {
-    win.webContents.openDevTools();
+    mainWindow.webContents.openDevTools();
   }
 
 
-  win.on('closed', () => {
+  mainWindow.on('closed', () => {
     mainWindow = null;
   });
-
-  return win;
 }
 
 
 app.whenReady().then(() => {
-  mainWindow = createWindow();
-
+  createWindow();
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
@@ -44,7 +40,7 @@ app.whenReady().then(() => {
   });
 });
 
-
+// Fecha a aplicação quando todas as janelas são fechadas (exceto no macOS)
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
@@ -52,6 +48,6 @@ app.on('window-all-closed', () => {
 });
 
 
-app.on('error', (error) => {
-  console.error('Erro na aplicação:', error);
+process.on('uncaughtException', (error) => {
+  console.error('Erro não capturado:', error);
 });

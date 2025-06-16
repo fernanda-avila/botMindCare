@@ -96,3 +96,86 @@
 .signupLink a:hover {
   text-decoration: underline;
 }
+
+
+
+.passwordHints {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.5rem;
+}
+
+.validHint {
+  color: #4CAF50;
+}
+
+.invalidHint {
+  color: #666;
+}
+
+.passwordInputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.showPasswordButton {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  font-size: 1.2rem;
+  padding: 0;
+}
+
+.showPasswordButton:hover {
+  color: #333;
+}
+
+/* Adicione ou atualize estas regras no seu arquivo CSS */
+
+.hintText {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.3rem;
+}
+
+.passwordHints {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.3rem;
+}
+
+.validHint {
+  color: #4CAF50;
+}
+
+.invalidHint {
+  color: #666;
+}
+
+.passwordInputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.showPasswordButton {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  font-size: 1.2rem;
+  padding: 0;
+}
+
+.showPasswordButton:hover {
+  color: #333;
+}
+
+
+
