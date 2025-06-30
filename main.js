@@ -40,7 +40,7 @@ app.whenReady().then(() => {
   });
 });
 
-// Fecha a aplicação quando todas as janelas são fechadas (exceto no macOS)
+
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();

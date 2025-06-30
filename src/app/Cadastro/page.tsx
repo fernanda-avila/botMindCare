@@ -71,7 +71,7 @@ function verificaContextoOfensivo(nickname: string) {
 function validarSenhaComplexa(senha: string) {
   const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}$/;
   return regex.test(senha);
-}
+};
 
 function validarCPF(cpf: string) {
   cpf = cpf.replace(/[^\d]+/g, '');

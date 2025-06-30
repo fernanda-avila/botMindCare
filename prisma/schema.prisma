@@ -1,0 +1,16 @@
+datasource db {
+  provider = "sqlite" // ou "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Historico {
+  id        Int      @id @default(autoincrement())
+  usuario   String
+  texto     String
+  remetente String
+  criadoEm  DateTime @default(now())
+}
