@@ -13,6 +13,26 @@ type Message = {
   timestamp: Date;
 };
 
+// Função para verificar linguagem ofensiva
+const containsOffensiveLanguage = (text: string): boolean => {
+  const offensiveWords = [
+    'porra', 'caralho', 'merda', 'puta', 'vadia', 'viado', 'bicha', 'foda-se', 'cuzão',
+    'buceta', 'pau no cu', 'filho da puta', 'arrombado', 'escroto', 'imbecil', 'idiota',
+    'retardado', 'babaca', 'otário', 'palhaço', 'lixo humano',
+    'preto noia', 'macaco', 'judeu safado', 'nazista', 'terrorista',
+    'viadinho', 'sapatão', 'traveco', 'baitola', 'cu'
+  ];
+
+  const offensiveRegex = new RegExp(
+    offensiveWords
+      .map(word => word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+      .join('|'), 
+    'i'
+  );
+
+  return offensiveRegex.test(text);
+};
+
 export default function ChatPage() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState('');
@@ -41,14 +61,20 @@ export default function ChatPage() {
       if (userMessages.length === 0) {
         setMessages([{
           id: '1',
-          text: `Olá, ${currentUser}! Eu sou o Best Virtual, seu assistente de saúde mental. Como você está se sentindo hoje? 😊`,
+          text: 'Olá! Eu sou o Best Virtual, seu assistente de saúde mental. Como você está se sentindo hoje? 😊',
           sender: 'bot',
           timestamp: new Date()
         }]);
       } else {
+        const lastTopics = userMessages
+          .filter(msg => msg.sender === 'user')
+          .slice(-3)
+          .map(msg => msg.text)
+          .join(' ');
+
         const welcomeMessage: Message = {
           id: 'welcome',
-          text: `Que legal te ver novamente! Como você está se sentindo hoje? 😊`,
+          text: `Que bom te ver novamente! Como posso te ajudar hoje? 😊`,
           sender: 'bot',
           timestamp: new Date()
         };
@@ -94,6 +120,22 @@ export default function ChatPage() {
     e.preventDefault();
     if (!newMessage.trim() || isTyping) return;
 
+    // Verificação de linguagem ofensiva
+    if (containsOffensiveLanguage(newMessage)) {
+      const warningMessage: Message = {
+        id: Date.now().toString(),
+        text: 'Por favor, mantenha o respeito durante nossa conversa. Podemos continuar de forma positiva? 😊',
+        sender: 'bot',
+        timestamp: new Date()
+      };
+      
+      setMessages(prev => [...prev, warningMessage]);
+      await salvarNoHistorico(warningMessage);
+      setNewMessage('');
+      return;
+    }
+
+    // Verificação de emergência
     if (/(suicídio|me matar|quero morrer|não aguento mais)/i.test(newMessage)) {
       setShowEmergencyModal(true);
       return;
@@ -119,13 +161,13 @@ export default function ChatPage() {
         role: "system",
         content: `Você é um assistente de saúde mental chamado Best Virtual. Siga estas diretrizes:
 1. Seja empático e acolhedor
-2. Ressalte que você não substitui ajuda profissional
-3. Em casos de crise, sugira contatar um colaborador do MindCare
-4. Use linguagem simples e acessível
-5. Responda em português brasileiro
-6. Mantenha respostas entre 2-4 frases
-7. Quando perguntado se conhece o usuário, responda com o tema das últimas mensagens
-8. Informe que no modo logado, você tem acesso ao histórico de conversas antigas do usuário.`  
+2. Use o nome do usuário (${currentUser || 'usuário'}) apenas quando for natural
+3. Ressalte que você não substitui ajuda profissional
+4. Em casos de crise, sugira contatar um colaborador do MindCare
+5. Use linguagem simples e acessível
+6. Responda em português brasileiro
+7. Mantenha respostas entre 2-4 frases
+8. Quando perguntado sobre histórico, mencione que tem acesso às conversas anteriores`
       };
 
       const messagesForAPI = updatedMessages
@@ -153,8 +195,17 @@ export default function ChatPage() {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error?.message || `Erro HTTP: ${response.status}`);
+        let errorMessage = `Erro HTTP: ${response.status}`;
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.error?.message || 
+                        errorData.message || 
+                        errorData.error ||
+                        JSON.stringify(errorData);
+        } catch (parseError) {
+          console.error('Erro ao parsear resposta de erro:', parseError);
+        }
+        throw new Error(errorMessage);
       }
 
       const data = await response.json();
