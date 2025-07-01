@@ -1,5 +1,4 @@
-// customerValidator.ts
-import { isUsernameTaken, isEmailTaken, isCpfTaken } from './customerService';
+import { isEmailTaken, isCpfTaken } from './customerService';
 
 interface FormData {
   name: string;
@@ -110,15 +109,11 @@ export const validateCustomer = async (data: FormData & { password: string }): P
     errors.push(senhaValidation);
   }
 
-  const [usernameExists, emailExists, cpfExists] = await Promise.all([
-    isUsernameTaken(data.username),
+  const [ emailExists, cpfExists] = await Promise.all([
     isEmailTaken(data.email),
     isCpfTaken(data.cpf)
   ]);
-
-  if (usernameExists) errors.push('Este username já está em uso.');
   if (emailExists) errors.push('Este email já está em uso.');
   if (cpfExists) errors.push('Este CPF já está em uso.');
-
   return errors;
 };

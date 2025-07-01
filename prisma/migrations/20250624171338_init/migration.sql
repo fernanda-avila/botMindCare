@@ -1,8 +1,0 @@
--- CreateTable
-CREATE TABLE "Historico" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "usuario" TEXT NOT NULL,
-    "texto" TEXT NOT NULL,
-    "remetente" TEXT NOT NULL,
-    "criadoEm" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-);

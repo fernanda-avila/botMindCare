@@ -1,16 +1,77 @@
-datasource db {
-  provider = "sqlite" // ou "postgresql"
-  url      = env("DATABASE_URL")
-}
-
 generator client {
   provider = "prisma-client-js"
 }
 
-model Historico {
-  id        Int      @id @default(autoincrement())
-  usuario   String
-  texto     String
-  remetente String
-  criadoEm  DateTime @default(now())
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Customer {
+  id                     Int                        @id @default(autoincrement())
+  name                   String
+  email                  String                     @unique
+  password               String
+  cpf                    String                     @unique @db.VarChar(11)
+  AiChatSession          AiChatSession?
+  personalChatSessions   PersonalChatParticipant[]
+  sentMessages           PersonalMessage[]          @relation("SenderMessages")
+
+  @@map("customer")
+}
+
+model AiMessage {
+  id           Int       @id @default(autoincrement())
+  sessionId    Int
+  //o Role é o usuário e o outro é a ia. Logo, "user" | "assistant"
+  role         String        
+  content      String    @db.Text
+  timestamp    DateTime  @default(now())
+
+  ChatSession  AiChatSession @relation(fields: [sessionId], references: [id])
+
+  @@map("aiMessage")
+}
+
+//Chat entre o usuário e a IA
+model AiChatSession {
+  id          Int       @id @default(autoincrement())
+  customer_id Int       @unique  
+  createdAt   DateTime  @default(now())
+  messages    AiMessage[]
+  customer    Customer  @relation(fields: [customer_id], references: [id])
+
+  @@map("aiChatSession")
+}
+
+model PersonalChatSession {
+  id            Int                        @id @default(autoincrement())
+  createdAt     DateTime                   @default(now())
+  messages      PersonalMessage[]
+  participants  PersonalChatParticipant[]
+
+  @@map("personalChatSession")
+}
+
+model PersonalChatParticipant {
+  id          Int                   @id @default(autoincrement())
+  customer    Customer              @relation(fields: [customerId], references: [id])
+  customerId  Int
+  session     PersonalChatSession   @relation(fields: [sessionId], references: [id])
+  sessionId   Int
+
+  @@unique([customerId, sessionId])
+  @@map("personalChatParticipant")
+}
+
+model PersonalMessage {
+  id           Int                     @id @default(autoincrement())
+  session      PersonalChatSession     @relation(fields: [sessionId], references: [id])
+  sessionId    Int
+  sender       Customer                @relation("SenderMessages", fields: [senderId], references: [id])
+  senderId     Int
+  content      String                  @db.Text
+  timestamp    DateTime                @default(now())
+
+  @@map("personalMessage")
 }

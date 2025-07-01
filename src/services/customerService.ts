@@ -1,29 +1,31 @@
-// src/services/customerService.ts
-interface Customer {
-  name: string;
-  username: string;
-  email: string;
-  cpf: string;
-}
+import { PrismaClient } from "@prisma/client";
+import {Customer as CustomerInterface} from "../interfaces/customer.interface"
 
-const database: Customer[] = [
-  { name: 'João', username: 'joao123', email: 'joao@email.com', cpf: '12345678900' }
-];
+const prisma = new PrismaClient();
 
-export const isUsernameTaken = async (username: string): Promise<boolean> => {
-  return database.some(user => user.username === username);
+export const isCpfTaken = async (cpf: string): Promise<boolean> => {
+  const user =  await prisma.customer.findFirst({
+    where:{cpf:cpf}
+  })
+  if(user) return true;
+  return false;
 };
 
 export const isEmailTaken = async (email: string): Promise<boolean> => {
-  return database.some(user => user.email === email);
+  const user =  await prisma.customer.findFirst({
+    where:{email:email}
+  })
+  if(user) return true;
+  return false;
 };
 
-export const isCpfTaken = async (cpf: string): Promise<boolean> => {
-  return database.some(user => user.cpf === cpf);
+export const addCustomer = (customer: CustomerInterface): void => {
+  prisma.customer.create({
+    data:{
+      "name": customer.name,
+      "email": customer.email,
+      "password": customer.password,
+      "cpf": customer.cpf
+    }
+  })
 };
-
-export const addCustomer = (customer: Customer): void => {
-  database.push(customer);
-};
-
-export const getAllCustomers = (): Customer[] => [...database];
