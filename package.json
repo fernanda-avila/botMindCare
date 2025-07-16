@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
+    "test": "jest",
     "dev": "concurrently \"next dev\" \"wait-on http://localhost:3000 && electron .\"",
     "build": "next build",
     "start": "next start",
@@ -23,6 +24,7 @@
     "@types/react": "^19.1.4",
     "concurrently": "^9.1.2",
     "electron": "^28.1.0",
+    "jest": "^30.0.4",
     "typescript": "5.8.3",
     "wait-on": "^8.0.3"
   }
