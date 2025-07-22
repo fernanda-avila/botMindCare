@@ -332,7 +332,8 @@
     color: white;
 }
 
-.logoutButton {
+.logoutButton,
+.backButton {
     background: none;
     border: none;
     color: white;
@@ -536,3 +537,6 @@
     font-size: 0.9rem;
   }
 }
+
+
+

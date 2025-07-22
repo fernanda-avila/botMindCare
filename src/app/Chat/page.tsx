@@ -5,6 +5,7 @@ import { FaPaperPlane, FaHeart, FaSignOutAlt } from 'react-icons/fa';
 import styles from './Chat.module.css';
 import MessageBubble from '../components/MessageBubble/MessageBubble';
 import EmergencyModal from '../components/EmergencyModal/EmergencyModal';
+import { FiArrowLeft } from 'react-icons/fi';
 
 type Message = {
   id: string;
@@ -13,7 +14,6 @@ type Message = {
   timestamp: Date;
 };
 
-// Função para verificar linguagem ofensiva
 const containsOffensiveLanguage = (text: string): boolean => {
   const offensiveWords = [
     'porra', 'caralho', 'merda', 'puta', 'vadia', 'viado', 'bicha', 'foda-se', 'cuzão',
@@ -24,9 +24,7 @@ const containsOffensiveLanguage = (text: string): boolean => {
   ];
 
   const offensiveRegex = new RegExp(
-    offensiveWords
-      .map(word => word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
-      .join('|'), 
+    offensiveWords.map(word => word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|'),
     'i'
   );
 
@@ -66,12 +64,6 @@ export default function ChatPage() {
           timestamp: new Date()
         }]);
       } else {
-        const lastTopics = userMessages
-          .filter(msg => msg.sender === 'user')
-          .slice(-3)
-          .map(msg => msg.text)
-          .join(' ');
-
         const welcomeMessage: Message = {
           id: 'welcome',
           text: `Que bom te ver novamente! Como posso te ajudar hoje? 😊`,
@@ -93,19 +85,20 @@ export default function ChatPage() {
 
   useEffect(() => {
     const user = localStorage.getItem('usuarioAtual');
-    setCurrentUser(user);
     if (user) {
+      setCurrentUser(user);
       fetchHistorico(user);
     }
   }, []);
 
   const salvarNoHistorico = async (mensagem: Message) => {
+    if (!currentUser) return;
     try {
       await fetch('/api/historico', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          user: currentUser ?? 'Anônimo',
+          user: currentUser,
           message: mensagem.text,
           sender: mensagem.sender,
           timestamp: mensagem.timestamp
@@ -120,7 +113,6 @@ export default function ChatPage() {
     e.preventDefault();
     if (!newMessage.trim() || isTyping) return;
 
-    // Verificação de linguagem ofensiva
     if (containsOffensiveLanguage(newMessage)) {
       const warningMessage: Message = {
         id: Date.now().toString(),
@@ -128,14 +120,13 @@ export default function ChatPage() {
         sender: 'bot',
         timestamp: new Date()
       };
-      
+
       setMessages(prev => [...prev, warningMessage]);
       await salvarNoHistorico(warningMessage);
       setNewMessage('');
       return;
     }
 
-    // Verificação de emergência
     if (/(suicídio|me matar|quero morrer|não aguento mais)/i.test(newMessage)) {
       setShowEmergencyModal(true);
       return;
@@ -161,7 +152,7 @@ export default function ChatPage() {
         role: "system",
         content: `Você é um assistente de saúde mental chamado Best Virtual. Siga estas diretrizes:
 1. Seja empático e acolhedor
-2. Use o nome do usuário (${currentUser || 'usuário'}) apenas quando for natural
+2. Use o nome do usuário apenas quando for natural
 3. Ressalte que você não substitui ajuda profissional
 4. Em casos de crise, sugira contatar um colaborador do MindCare
 5. Use linguagem simples e acessível
@@ -172,7 +163,7 @@ export default function ChatPage() {
 
       const messagesForAPI = updatedMessages
         .filter(msg => !(msg.id === '1' && msg.sender === 'bot'))
-        .filter(msg => msg.id !== 'welcome') 
+        .filter(msg => msg.id !== 'welcome')
         .map(msg => ({
           role: msg.sender === 'user' ? 'user' : 'assistant',
           content: msg.text
@@ -180,7 +171,7 @@ export default function ChatPage() {
 
       const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
         method: 'POST',
-        headers: { 
+        headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${process.env.GROQ_API_KEY}`
         },
@@ -198,10 +189,7 @@ export default function ChatPage() {
         let errorMessage = `Erro HTTP: ${response.status}`;
         try {
           const errorData = await response.json();
-          errorMessage = errorData.error?.message || 
-                        errorData.message || 
-                        errorData.error ||
-                        JSON.stringify(errorData);
+          errorMessage = errorData.error?.message || errorData.message || errorData.error || JSON.stringify(errorData);
         } catch (parseError) {
           console.error('Erro ao parsear resposta de erro:', parseError);
         }
@@ -259,16 +247,25 @@ export default function ChatPage() {
         </div>
 
         <div className={styles.userControls}>
-          {currentUser && (
+          {currentUser ? (
             <div className={styles.userInfo}>
               <span>Olá, {currentUser}</span>
               <button onClick={handleLogout} className={styles.logoutButton}>
                 <FaSignOutAlt />
               </button>
             </div>
+          ) : (
+            <button
+  onClick={() => window.location.href = '/'}
+  className={styles.backButton}
+>
+  <FiArrowLeft size={24} style={{ verticalAlign: 'middle', position: 'relative', top: '2px' }} />
+
+</button>
           )}
-          <button 
-            onClick={() => setShowEmergencyModal(true)} 
+
+          <button
+            onClick={() => setShowEmergencyModal(true)}
             className={styles.emergencyButton}
           >
             <FaHeart /> Ajuda Emergencial
@@ -278,7 +275,7 @@ export default function ChatPage() {
 
       <div className={styles.messagesContainer}>
         {messages.map((message) => (
-          <MessageBubble 
+          <MessageBubble
             key={message.id}
             message={message.text}
             sender={message.sender}
@@ -287,7 +284,7 @@ export default function ChatPage() {
         ))}
 
         {isTyping && (
-          <MessageBubble 
+          <MessageBubble
             message="Estou pensando em como te ajudar..."
             sender="bot"
             time={new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -307,8 +304,8 @@ export default function ChatPage() {
             className={styles.messageInput}
             disabled={isTyping}
           />
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className={styles.sendButton}
             disabled={isTyping || !newMessage.trim()}
           >
@@ -326,7 +323,7 @@ export default function ChatPage() {
         </div>
       </form>
 
-      <EmergencyModal 
+      <EmergencyModal
         isOpen={showEmergencyModal}
         onClose={() => setShowEmergencyModal(false)}
       />
